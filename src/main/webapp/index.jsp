@@ -12,22 +12,6 @@
 <body>
 <h1>Tic-Tac-Toe</h1>
 
-
-<script>
-    function restart() {
-        $.ajax({
-            url: '/restart',
-            type: 'POST',
-            contentType: 'application/json;charset=UTF-8',
-            async: false,
-            success: function () {
-                location.reload();
-            }
-        });
-    }
-</script>
-
-</body>
 <table>
     <tr>
         <td onclick="window.location='/logic?click=0'">${data.get(0).getSign()}</td>
@@ -51,9 +35,30 @@
 
 <c:if test="${winner == CROSSES}">
     <h1>CROSSES WIN!</h1>
+    <button onclick="restart()">Start again</button>
 </c:if>
 <c:if test="${winner == NOUGHTS}">
     <h1>NOUGHTS WIN!</h1>
+    <button onclick="restart()">Start again</button>
+</c:if>
+<c:if test="${draw}">
+    <h1>IT'S A DRAW</h1>
+    <button onclick="restart()">Start again</button>
 </c:if>
 
+<script>
+    function restart() {
+        $.ajax({
+            url: '/restart',
+            type: 'POST',
+            contentType: 'application/json;charset=UTF-8',
+            async: false,
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+</script>
+
+</body>
 </html>
